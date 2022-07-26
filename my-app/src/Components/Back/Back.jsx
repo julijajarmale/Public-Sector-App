@@ -24,6 +24,7 @@ function Back({show}) {
     const [modalSector, setModalSector] = useState(null)
 
     const [proposals, setProposals] = useState(null)
+    const [deleteProposal, setDeleteProposal] = useState(null)
 
 
 //READ MUNI
@@ -112,6 +113,22 @@ useEffect(() => {
         .then(res => setProposals(res.data));
 }, [lastUpdate]);
 
+//READ BACK PROPOSALS
+useEffect(() => {
+    axios.get('http://localhost:3003/admin/proposals', authConfig())
+        .then(res => setProposals(res.data));
+}, [lastUpdate]);
+
+//DELETE PROPOSALS
+
+useEffect(() => {
+    if (null === deleteProposal) return;
+    axios.delete('http://localhost:3003/admin/proposals/' + deleteProposal.id, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+    
+}, [deleteProposal]);
 
     return (
         <BackContext.Provider value={{
@@ -128,6 +145,7 @@ useEffect(() => {
     setEditSector, 
     setModalSector,
     proposals,
+    setDeleteProposal,
            
         }}>
               {

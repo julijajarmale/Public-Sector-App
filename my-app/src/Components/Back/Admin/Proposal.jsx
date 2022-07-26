@@ -1,8 +1,11 @@
+import { useContext } from "react";
+import BackContext from "../BackContext";
 
 function Proposal({proposal}) {
 
+    const { setDeleteProposal } = useContext(BackContext);
     const handleDelete = () => {
-       
+        setDeleteProposal(proposal)
     }
 
     const handleEdit =() => {

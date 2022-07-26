@@ -284,6 +284,18 @@ ON municipalities.id = proposals.muni_id
   });
 });
 
+// Read Back Proposals
+app.get("/admin/proposals", (req, res) => {
+  const sql = `
+  SELECT *
+  FROM proposals
+  
+`;
+  con.query(sql, (err, result) => {
+      if (err) throw err;
+      res.send(result);
+  });
+});
 //CREATE PROPOSAL FRONT
 app.post("/proposals", (req, res) => {
   const sql = `
@@ -311,6 +323,18 @@ app.post("/proposals", (req, res) => {
   );
 });
 
+//Delete Proposal
+
+app.delete("/admin/proposals/:id", (req, res) => {
+  const sql = `
+  DELETE FROM proposals
+  WHERE id = ?
+  `;
+  con.query(sql, [req.params.id], (err, result) => {
+      if (err) throw err;
+      res.send({ result, msg: { text: 'OK, Cat gone', type: 'success' } });
+  });
+});
 
 
 

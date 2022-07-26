@@ -5,6 +5,7 @@ import Nav from './Nav';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { authConfig } from '../../Functions/auth';
+import Admin from './Admin/Admin';
 
 
 function Back({show}) {
@@ -21,6 +22,9 @@ function Back({show}) {
     const [deleteSector, setDeleteSector] = useState(null)
     const [editSector, setEditSector] = useState(null)
     const [modalSector, setModalSector] = useState(null)
+
+    const [proposals, setProposals] = useState(null)
+
 
 //READ MUNI
 useEffect(() => {
@@ -101,6 +105,14 @@ useEffect(() => {
        
 }, [editSector]);
 
+
+//READ PROPOSALS
+useEffect(() => {
+    axios.get('http://localhost:3003/proposals', authConfig())
+        .then(res => setProposals(res.data));
+}, [lastUpdate]);
+
+
     return (
         <BackContext.Provider value={{
     municipalities,
@@ -115,6 +127,7 @@ useEffect(() => {
     modalSector, 
     setEditSector, 
     setModalSector,
+    proposals,
            
         }}>
               {
@@ -122,6 +135,7 @@ useEffect(() => {
                     <>
                     
                     <Nav/>
+                    <Admin/>
                    
             
                     </>

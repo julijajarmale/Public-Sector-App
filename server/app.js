@@ -43,11 +43,29 @@ const doAuth = function(req, res, next) {
               }
           }
       );
-  } else (0 === req.url.indexOf('/login-check') || 0 === req.url.indexOf('/login') || 0 === req.url.indexOf('/')); {
+  } else if (0 === req.url.indexOf('/login-check') || 0 === req.url.indexOf('/login') || 0 === req.url.indexOf('/')) {
       next();
-  } 
+  } else { 
+      const sql = `
+      SELECT
+      name, role
+      FROM users
+      WHERE session = ?
+  `;
+      con.query(
+          sql, [req.headers['authorization'] || ''],
+          (err, results) => {
+              if (err) throw err;
+              if (!results.length) {
+                  res.status(401).send({});
+                  req.connection.destroy();
+              } else {
+                  next();
+              }
+          }
+      );
   }
-
+}
 app.use(doAuth)
 
 // AUTH
@@ -80,7 +98,6 @@ app.get("/login-check", (req, res) => {
       }
   });
 });
-
 
 app.post("/login", (req, res) => {
   const key = uuid.v4();

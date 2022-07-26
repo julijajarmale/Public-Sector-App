@@ -38,7 +38,7 @@ const handleCreate = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-4 ml-1">
+        <div className="col-4">
           <form className="form">
             <h2>Add Proposal</h2>
             <div className="form-row">

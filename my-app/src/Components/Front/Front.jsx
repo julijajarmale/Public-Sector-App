@@ -4,12 +4,14 @@ import FrontNav from './Nav';
 import Create from "./Create"
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import List from './List';
 
 function Front() {
    const [lastUpdate, setLastUpdate] = useState(Date.now());
    const [municipalities, setMunicipalities] = useState(null);
    const [sectors, setSectors] = useState(null);
 
+    const[proposals, setProposals] = useState(null);
    const [createProposal, setCreateProposal] = useState(null);
    //const [createComment, setCreateComment] = useState(null);
   
@@ -39,16 +41,13 @@ useEffect(() => {
     
 }, [createProposal]);
 
-//Create Comment
+//READ Proposals
+useEffect(() => {
+    axios.get('http://localhost:3003/proposals')
+        .then(res => setProposals(res.data));
+}, [lastUpdate]);
 
-//// Create
-//useEffect(() => {
-//    if (null === createComment) return;
-//    axios.post('http://localhost:3003/proposals/', createComment)
-//        .then(_ => {
-//            setLastUpdate(Date.now());
-//        })
-//}, [createComment]);
+
 
         return (
             <FrontContext.Provider value={{
@@ -56,7 +55,7 @@ useEffect(() => {
             municipalities,
             sectors,
             setCreateProposal,
-           // setCreateComment,
+            proposals,
 
             }}>
                <FrontNav/>
@@ -66,10 +65,9 @@ useEffect(() => {
             
                </div>
                </div>
-               <div className="container front-container">
+               <div className="container">
                     <div className="row">
-               
-    
+                <List/>
                     </div>
                </div>
               

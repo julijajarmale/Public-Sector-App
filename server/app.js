@@ -166,6 +166,21 @@ app.get("/sectors", (req, res) => {
   });
 });
 
+// Read Front Proposals
+app.get("/proposals", (req, res) => {
+  const sql = `
+  SELECT proposals.title, proposals.comment, sectors.title AS sector
+
+FROM proposals
+LEFT JOIN sectors
+ON sectors.id = proposals.sector_id
+
+`;
+  con.query(sql, (err, result) => {
+      if (err) throw err;
+      res.send(result);
+  });
+});
 //CREATE PROPOSAL FRONT
 app.post("/proposals", (req, res) => {
   const sql = `

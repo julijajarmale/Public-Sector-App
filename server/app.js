@@ -287,8 +287,15 @@ ON municipalities.id = proposals.muni_id
 // Read Back Proposals
 app.get("/admin/proposals", (req, res) => {
   const sql = `
-  SELECT *
+  SELECT proposals.title, proposals.comment, sectors.title AS sector, municipalities.name AS muni
+
   FROM proposals
+  LEFT JOIN sectors
+  ON sectors.id = proposals.sector_id
+  LEFT JOIN municipalities
+  ON municipalities.id = proposals.muni_id
+  
+  
   
 `;
   con.query(sql, (err, result) => {

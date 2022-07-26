@@ -11,6 +11,7 @@ function Front() {
    const [sectors, setSectors] = useState(null);
 
    const [createProposal, setCreateProposal] = useState(null);
+   //const [createComment, setCreateComment] = useState(null);
   
 
 
@@ -38,6 +39,16 @@ useEffect(() => {
     
 }, [createProposal]);
 
+//Create Comment
+
+//// Create
+//useEffect(() => {
+//    if (null === createComment) return;
+//    axios.post('http://localhost:3003/proposals/', createComment)
+//        .then(_ => {
+//            setLastUpdate(Date.now());
+//        })
+//}, [createComment]);
 
         return (
             <FrontContext.Provider value={{
@@ -45,6 +56,7 @@ useEffect(() => {
             municipalities,
             sectors,
             setCreateProposal,
+           // setCreateComment,
 
             }}>
                <FrontNav/>

@@ -170,14 +170,16 @@ app.get("/sectors", (req, res) => {
 app.post("/proposals", (req, res) => {
   const sql = `
   INSERT INTO proposals
-  (title, sector_id)
-  VALUES (?, ?)
+  (title, sector_id, comment)
+  VALUES (?, ?, ?)
   `;
   con.query(
     sql,
     [
       req.body.title,
-      req.body.sector
+      req.body.sector,
+      req.body.comment,
+
       
     ],
     (err, result) => {

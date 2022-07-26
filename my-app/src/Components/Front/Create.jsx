@@ -12,6 +12,8 @@ const {setCreateProposal, municipalities, sectors} = useContext(FrontContext)
 const [title, setTitle] = useState("");
 const [municipality, setMunicipality] = useState("");
 const [sector, setSector] = useState("");
+const [comment, setComment] = useState('');
+
 
 
   
@@ -20,12 +22,15 @@ const handleCreate = () => {
       title, 
       municipality: parseInt(municipality),
       sector: parseInt(sector),
+      comment
       
      };
     setCreateProposal(data);
     setTitle("");
     setMunicipality("0");
     setSector("0");
+    setComment('');
+   // setCreateComment({comment, sectorId: sector.id});
     
    
   };
@@ -77,6 +82,9 @@ const handleCreate = () => {
                   : null}
               </select>
             </div>
+            <div className="form-group mt-3">
+                    <textarea className="form-control" value={comment} onChange={e => setComment(e.target.value)} rows="3"></textarea>
+                </div>
             <button
               type="button"
               className="btn"

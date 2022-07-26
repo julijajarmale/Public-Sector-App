@@ -153,6 +153,46 @@ app.get("/municipalities", (req, res) => {
   });
 });
 
+// Read Front Sector
+app.get("/sectors", (req, res) => {
+  const sql = `
+  SELECT *
+  FROM sectors
+  ORDER BY title
+`;
+  con.query(sql, (err, result) => {
+      if (err) throw err;
+      res.send(result);
+  });
+});
+
+//CREATE PROPOSAL FRONT
+app.post("/proposals", (req, res) => {
+  const sql = `
+  INSERT INTO proposals
+  (title, sector_id)
+  VALUES (?, ?)
+  `;
+  con.query(
+    sql,
+    [
+      req.body.title,
+      req.body.sector
+      
+    ],
+    (err, result) => {
+      if (err) throw err;
+      res.send({
+        result,
+        msg: { text: "OK, new and shiny product was created", type: "success" },
+      });
+    }
+  );
+});
+
+
+
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })

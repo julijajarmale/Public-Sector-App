@@ -6,11 +6,12 @@ import FrontContext from "./FrontContext";
 
 function Create() {
  
-const {setCreateProposal, municipalities} = useContext(FrontContext)
+const {setCreateProposal, municipalities, sectors} = useContext(FrontContext)
 
 
 const [title, setTitle] = useState("");
 const [municipality, setMunicipality] = useState("");
+const [sector, setSector] = useState("");
 
 
   
@@ -18,11 +19,13 @@ const handleCreate = () => {
     const data = { 
       title, 
       municipality: parseInt(municipality),
+      sector: parseInt(sector),
       
      };
     setCreateProposal(data);
     setTitle("");
     setMunicipality("0");
+    setSector("0");
     
    
   };
@@ -58,7 +61,22 @@ const handleCreate = () => {
                   : null}
               </select>
             </div>
-
+            <div className="form-row">
+              <label>Select Sector</label>
+              <select
+                className="input"
+                onChange={(e) => setSector(e.target.value)}
+                value={sector}
+              >
+                {sectors
+                  ? sectors.map((sector) => (
+                      <option key={sector.id} value={sector.id}>
+                        {sector.title} 
+                      </option>
+                    ))
+                  : null}
+              </select>
+            </div>
             <button
               type="button"
               className="btn"

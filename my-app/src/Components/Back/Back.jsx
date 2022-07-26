@@ -24,6 +24,7 @@ function Back({show}) {
     const [modalSector, setModalSector] = useState(null)
 
     const [proposals, setProposals] = useState(null)
+    const [editProposal, setEditProposal] = useState(null)
     const [deleteProposal, setDeleteProposal] = useState(null)
 
 
@@ -119,6 +120,17 @@ useEffect(() => {
         .then(res => setProposals(res.data));
 }, [lastUpdate]);
 
+//EDIT Proposals
+
+useEffect(() => {
+    if (null === editProposal) return;
+    axios.put('http://localhost:3003/admin/proposals/' + editProposal.id, editProposal, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+       
+}, [editProposal]);
+
 //DELETE PROPOSALS
 
 useEffect(() => {
@@ -146,6 +158,7 @@ useEffect(() => {
     setModalSector,
     proposals,
     setDeleteProposal,
+    setEditProposal
            
         }}>
               {

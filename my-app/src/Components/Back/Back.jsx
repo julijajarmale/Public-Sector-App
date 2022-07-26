@@ -4,6 +4,7 @@ import SectorCrud from './Sectors/Crud';
 import Nav from './Nav';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { authConfig } from '../../Functions/auth';
 
 
 function Back({show}) {
@@ -23,7 +24,7 @@ function Back({show}) {
 
 //READ MUNI
 useEffect(() => {
-    axios.get('http://localhost:3003/admin/municipalities')
+    axios.get('http://localhost:3003/admin/municipalities', authConfig())
         .then(res => setMunicipalities(res.data));
 }, [lastUpdate]);
 
@@ -31,7 +32,7 @@ useEffect(() => {
 
 useEffect(() => {
     if (null === createMunicipality) return;
-    axios.post('http://localhost:3003/admin/municipalities', createMunicipality)
+    axios.post('http://localhost:3003/admin/municipalities', createMunicipality, authConfig())
     .then(res => {
         setLastUpdate(Date.now());
     })
@@ -42,7 +43,7 @@ useEffect(() => {
 
 useEffect(() => {
     if (null === deleteMunicipality) return;
-    axios.delete('http://localhost:3003/admin/municipalities/' + deleteMunicipality.id)
+    axios.delete('http://localhost:3003/admin/municipalities/' + deleteMunicipality.id, authConfig())
         .then(res => {
             setLastUpdate(Date.now());
         })
@@ -53,7 +54,7 @@ useEffect(() => {
 
 useEffect(() => {
     if (null === editMuni) return;
-    axios.put('http://localhost:3003/admin/municipalities/' + editMuni.id, editMuni)
+    axios.put('http://localhost:3003/admin/municipalities/' + editMuni.id, editMuni, authConfig())
         .then(res => {
             setLastUpdate(Date.now());
         })
@@ -63,7 +64,7 @@ useEffect(() => {
 
 //READ SECTORS
 useEffect(() => {
-    axios.get('http://localhost:3003/admin/sectors')
+    axios.get('http://localhost:3003/admin/sectors', authConfig())
         .then(res => setSectors(res.data));
 }, [lastUpdate]);
 
@@ -71,7 +72,7 @@ useEffect(() => {
 
 useEffect(() => {
     if (null === createSector) return;
-    axios.post('http://localhost:3003/admin/sectors', createSector)
+    axios.post('http://localhost:3003/admin/sectors', createSector, authConfig())
     .then(res => {
         setLastUpdate(Date.now());
     })
@@ -82,7 +83,7 @@ useEffect(() => {
 
 useEffect(() => {
     if (null === deleteSector) return;
-    axios.delete('http://localhost:3003/admin/sectors/' + deleteSector.id)
+    axios.delete('http://localhost:3003/admin/sectors/' + deleteSector.id, authConfig())
         .then(res => {
             setLastUpdate(Date.now());
         })
@@ -93,7 +94,7 @@ useEffect(() => {
 
 useEffect(() => {
     if (null === editSector) return;
-    axios.put('http://localhost:3003/admin/sectors/' + editSector.id, editSector)
+    axios.put('http://localhost:3003/admin/sectors/' + editSector.id, editSector, authConfig())
         .then(res => {
             setLastUpdate(Date.now());
         })

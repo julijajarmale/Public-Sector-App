@@ -5,6 +5,7 @@ import Create from "./Create"
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import List from './List';
+import { authConfig } from '../../Functions/auth';
 
 function Front() {
    const [lastUpdate, setLastUpdate] = useState(Date.now());
@@ -20,13 +21,13 @@ function Front() {
 
    //READ MUNI
    useEffect(() => {
-    axios.get('http://localhost:3003/municipalities')
+    axios.get('http://localhost:3003/municipalities', authConfig())
         .then(res => setMunicipalities(res.data));
 }, [lastUpdate]);
 
 //READ Sectors
 useEffect(() => {
-    axios.get('http://localhost:3003/sectors')
+    axios.get('http://localhost:3003/sectors',authConfig())
         .then(res => setSectors(res.data));
 }, [lastUpdate]);
 
@@ -34,7 +35,7 @@ useEffect(() => {
 
 useEffect(() => {
     if (null === createProposal) return;
-    axios.post('http://localhost:3003/proposals', createProposal)
+    axios.post('http://localhost:3003/proposals', createProposal, authConfig())
     .then(res => {
         setLastUpdate(Date.now());
     })
@@ -43,7 +44,7 @@ useEffect(() => {
 
 //READ Proposals
 useEffect(() => {
-    axios.get('http://localhost:3003/proposals')
+    axios.get('http://localhost:3003/proposals', authConfig())
         .then(res => setProposals(res.data));
 }, [lastUpdate]);
 

@@ -1,5 +1,4 @@
 
-
 function Proposal({proposal}) {
 
 
@@ -8,9 +7,9 @@ function Proposal({proposal}) {
           <li className="list-item">
             
                 <div className="content">
-                    <span className="item">{proposal.title}</span>
+                    <b className="item">{proposal.title}</b>
                     <span className="item">{proposal.sector}</span>
-                
+                    <span className="item">{proposal.muni}</span>
                     <span className="item">{proposal.comment}</span>
                 </div>
                

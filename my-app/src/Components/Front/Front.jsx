@@ -36,38 +36,38 @@ useEffect(() => {
     }
 
 
-    //axios.get('http://localhost:3003/proposals' + query, authConfig())
-    //    .then(res => {
-    //        const proposals = new Map();
-    //        res.data.forEach(p => {
-    //            let sector;
-    //            if (null === p.sector) {
-    //                sector = null;
-    //            } else {
-    //                sector = {id: p.sector_id, sector: p.sector};
-    //            }
-    //            if (proposals.has(p.id)) {
-    //                const pr = proposals.get(p.id);
-    //                if (sector) {
-    //                    pr.com.push(sector);
-    //                }
-    //            } else {
-    //                proposals.set(p.id, {...p});
-    //                const pr = proposals.get(p.id);
-    //                pr.sector = [];
-    //                delete pr.sector_id;
-    //                if (sector) {
-    //                    pr.sector.push(sector);
-    //                    
-    //                }
-    //            }
-    //        });
-    //        
-    //        console.log([...proposals].map(e => e[1]));
-    //        setProposals([...proposals].map(e => e[1]).map((p, i) => ({ ...p, row: i })));
-    //    })
-//
-//}, [filter, search, lastUpdate]);
+    axios.get('http://localhost:3003/proposals' + query, authConfig())
+        .then(res => {
+            const proposals = new Map();
+            res.data.forEach(p => {
+                let sector;
+                if (null === p.sector) {
+                    sector = null;
+                } else {
+                    sector = {id: p.sector_id, sector: p.sector};
+                }
+                if (proposals.has(p.id)) {
+                    const pr = proposals.get(p.id);
+                    if (sector) {
+                        pr.com.push(sector);
+                    }
+                } else {
+                    proposals.set(p.id, {...p});
+                    const pr = proposals.get(p.id);
+                    pr.sector = [];
+                    delete pr.sector_id;
+                    if (sector) {
+                        pr.sector.push(sector);
+                        
+                    }
+                }
+            });
+            
+            console.log([...proposals].map(e => e[1]));
+            setProposals([...proposals].map(e => e[1]).map((p, i) => ({ ...p, row: i })));
+        })
+
+}, [filter, search, lastUpdate]);
 
    //READ MUNI
    useEffect(() => {
@@ -124,14 +124,12 @@ useEffect(() => {
                </div>
                </div>
                <div className="container">
-               <div className="row">
-                    <div className="col-12">
-                        <SortFilter />
-                    </div>
+               
+                
                     <div className="row">
                 <List/>
                     </div>
-               </div>
+              
                </div>
             </FrontContext.Provider>
         )

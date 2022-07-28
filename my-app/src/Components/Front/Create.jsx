@@ -82,8 +82,8 @@ const handleCreate = () => {
                   : null}
               </select>
             </div>
-            <div className="form-group mt-3">
-                    <textarea className="form-control" value={comment} onChange={e => setComment(e.target.value)} rows="3"></textarea>
+            <div className="form-row">
+                    <textarea className="input" value={comment} onChange={e => setComment(e.target.value)} rows="3"></textarea>
                 </div>
             <button
               type="button"

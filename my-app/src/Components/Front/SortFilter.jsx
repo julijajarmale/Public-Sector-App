@@ -42,13 +42,9 @@ function SortFilter() {
     }
 
     return (
-        <div className="card mt-4">
-            <div className="card-header">
-                <h2>Sort and Filter</h2>
-            </div>
-            <div className="card-body">
-                <div className="container">
-                    <div className="row">
+        <div className="row">
+           
+                    <h2>Sort and Filter</h2>
                         <div className="col-4">
                             <div className="form-group">
                                 <label>Sort By</label>
@@ -79,9 +75,7 @@ function SortFilter() {
                         </div>
                        
                     </div>
-                </div>
-            </div>
-        </div>
+               
     );
 }
 

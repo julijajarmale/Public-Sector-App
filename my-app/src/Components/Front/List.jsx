@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import FrontContext from "./FrontContext";
 import Proposal from "./Proposal";
+import SortFilter from "./SortFilter";
 
 
 function List() {
@@ -9,6 +10,9 @@ function List() {
   return (
     <div className="container list-container">
       <div className="row">
+        <div className="col-12">
+        <SortFilter/>
+        </div>
         <div className="col-12 list-form">
           <h2>List of Proposals</h2>
           <div className="list-group">

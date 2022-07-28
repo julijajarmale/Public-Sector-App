@@ -24,8 +24,8 @@ function Back({show}) {
     const [modalSector, setModalSector] = useState(null)
 
     const [proposals, setProposals] = useState(null)
-    const [editProposal, setEditProposal] = useState(null)
     const [deleteProposal, setDeleteProposal] = useState(null)
+    const [editProposal, setEditProposal] = useState(null)
 
 
 //READ MUNI

@@ -307,8 +307,8 @@ app.get("/admin/proposals", (req, res) => {
 app.post("/proposals", (req, res) => {
   const sql = `
   INSERT INTO proposals
-  (title, sector_id, muni_id, comment, aproved)
-  VALUES (?, ?, ?, ?, ?)
+  (title, sector_id, muni_id, comment)
+  VALUES (?, ?, ?, ?)
   `;
   con.query(
     sql,
@@ -316,8 +316,8 @@ app.post("/proposals", (req, res) => {
       req.body.title,
       req.body.sector,
       req.body.municipality,
-      req.body.comment,
-      req.body.aproved
+      req.body.comment
+     
 
       
     ],

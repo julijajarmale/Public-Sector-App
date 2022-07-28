@@ -14,7 +14,7 @@ function List() {
           <div className="list-group">
           <ul className="list-group-item">
             {proposals
-              ? proposals.map((proposal) => (
+              ?  proposals.map((proposal) => ( 
                   <Proposal key={proposal.id} proposal={proposal}></Proposal>
                 ))
               : null}

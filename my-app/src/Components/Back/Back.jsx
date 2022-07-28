@@ -25,6 +25,7 @@ function Back({show}) {
 
     const [proposals, setProposals] = useState(null)
     const [deleteProposal, setDeleteProposal] = useState(null)
+    const [approveProposal, setApproveProposal] = useState(null);
     
 
 
@@ -107,11 +108,7 @@ useEffect(() => {
        
 }, [editSector]);
 
-//READ PROPOSALS
-useEffect(() => {
-    axios.get('http://localhost:3003/proposals', authConfig())
-        .then(res => setProposals(res.data));
-}, [lastUpdate]);
+
 
 //READ BACK PROPOSALS
 useEffect(() => {
@@ -130,6 +127,20 @@ useEffect(() => {
 
 }, [deleteProposal]);
 
+
+// Edit proposal
+
+useEffect(() => {
+    if (null === approveProposal) {
+      return;
+    }
+    axios.put("http://localhost:3003/admin/proposals/" + approveProposal.id, approveProposal, authConfig()).then((res) => {
+      setLastUpdate(Date.now());
+    });
+  }, [approveProposal]);
+  
+
+
     return (
         <BackContext.Provider value={{
     municipalities,
@@ -145,7 +156,8 @@ useEffect(() => {
     setEditSector, 
     setModalSector,
     proposals,
-    setDeleteProposal
+    setDeleteProposal,
+    setApproveProposal
     
     
            

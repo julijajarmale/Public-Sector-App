@@ -269,7 +269,7 @@ app.get("/sectors", (req, res) => {
 // Read Front Proposals
 app.get("/proposals", (req, res) => {
   const sql = `
-  SELECT proposals.title, proposals.comment, sectors.title AS sector, municipalities.name AS muni
+  SELECT proposals.title, proposals.comment, sectors.title AS sector, municipalities.name AS muni, approved
 
 FROM proposals
 LEFT JOIN sectors
@@ -340,7 +340,18 @@ app.delete("/admin/proposals/:id", (req, res) => {
   });
 });
 
-
+//Edit Proposal
+app.put("/admin/proposals/:id", (req, res) => {
+  const sql = `
+  UPDATE proposals
+  SET approved = ? 
+  WHERE id = ?
+  `;
+  con.query(sql, [req.body.approved,  req.params.id], (err, result) => {
+      if (err) throw err;
+      res.send({ result, msg: { text: 'OK, Cat updated. Now it is as new', type: 'success' } });
+  });
+});
 
 
 app.get('/', (req, res) => {

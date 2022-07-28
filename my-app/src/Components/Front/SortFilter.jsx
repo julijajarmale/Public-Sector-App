@@ -10,8 +10,6 @@ function SortFilter() {
     const [s, setS] = useState('');
 
     
-
-    
     const doSearch = e => {
         setS(e.target.value);
         setSearch(e.target.value);
@@ -64,11 +62,11 @@ function SortFilter() {
                         </div>
                         <div className="col-4">
                             <div className="form-group">
-                                <label>Filter by Categories</label>
+                                <label>Filter by Sectors</label>
                                 <select className="form-control" onChange={e =>doFilter(e.target.value)} value={proposal}>
-                                    <option value="0">All Cats</option>
+                                    <option value="0">All Sectors</option>
                                     {
-                                        proposals ? proposals.map(p => <option key={proposal.id} value={p.id}>{p.title}</option>) : null
+                                        proposals ? proposals.map(p => <option key={proposal.id} value={p.id}>{p.sector}</option>) : null
                                     }
                                 </select>
                             </div>

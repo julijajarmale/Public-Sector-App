@@ -1,27 +1,21 @@
 
-import { useState } from "react";
+
 import { useContext} from "react";
 import BackContext from "../BackContext";
 
-function Proposal({ proposal }) {
+function BackProposal({ proposal }) {
 
-  const { setDeleteProposal, setEditProposal } = useContext(BackContext);
-
-  const [aproved, setAproved] = useState(false)
-
+  const { setDeleteProposal } = useContext(BackContext);
+  
+  const handleDelete = () => {
+      setDeleteProposal(proposal)
+  }
 
   const handleEdit = () => {
-    const data = {...proposal, aproved: aproved? 1:0};
-    setEditProposal(data)
-    setAproved()
-    console.log(proposal);
-  }
-  const handleDelete = () => {
   
-    setDeleteProposal(proposal);
-    console.log('suveike')
     
   }
+
 
   return (
     <li className="list-item">
@@ -30,8 +24,7 @@ function Proposal({ proposal }) {
         <span className="item">{proposal.sector}</span>
         <span className="item">{proposal.muni}</span>
         <span className="item">{proposal.comment}</span>
-        <p style={{color: proposal.aproved ? 'green' : 'red'}}>Approved: {proposal.aproved ? 'Yes' : 'No'}</p>
-      
+       
       </div>
       <div className="buttons">
         <button type="button" className="buttons btn4" onClick={handleEdit}>
@@ -45,4 +38,4 @@ function Proposal({ proposal }) {
   );
 }
 
-export default Proposal;
+export default BackProposal;

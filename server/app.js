@@ -269,7 +269,7 @@ app.get("/sectors", (req, res) => {
 // Read Front Proposals
 app.get("/proposals", (req, res) => {
   const sql = `
-  SELECT proposals.title, proposals.comment, sectors.title AS sector, municipalities.name AS muni, aproved
+  SELECT proposals.title, proposals.comment, sectors.title AS sector, municipalities.name AS muni
 
 FROM proposals
 LEFT JOIN sectors
@@ -287,15 +287,8 @@ ON municipalities.id = proposals.muni_id
 // Read Back Proposals
 app.get("/admin/proposals", (req, res) => {
   const sql = `
-  SELECT proposals.title, proposals.comment, sectors.title AS sector, municipalities.name AS muni, aproved
-
+  SELECT *
   FROM proposals
-  LEFT JOIN sectors
-  ON sectors.id = proposals.sector_id
-  LEFT JOIN municipalities
-  ON municipalities.id = proposals.muni_id
-  
-  
   
 `;
   con.query(sql, (err, result) => {
@@ -303,6 +296,9 @@ app.get("/admin/proposals", (req, res) => {
       res.send(result);
   });
 });
+
+
+
 //CREATE PROPOSAL FRONT
 app.post("/proposals", (req, res) => {
   const sql = `
@@ -316,9 +312,7 @@ app.post("/proposals", (req, res) => {
       req.body.title,
       req.body.sector,
       req.body.municipality,
-      req.body.comment
-     
-
+      req.body.comment,
       
     ],
     (err, result) => {
@@ -331,20 +325,9 @@ app.post("/proposals", (req, res) => {
   );
 });
 
-//Edit Proposal
-app.put("/admin/proposals/:id", (req, res) => {
-  const sql = `
-  UPDATE proposals
-  SET aproved = ? 
-  WHERE id = ?
-  `;
-  con.query(sql, [req.body.aproved, req.params.id], (err, result) => {
-      if (err) throw err;
-      res.send({ result, msg: { text: 'OK, Cat updated. Now it is as new', type: 'success' } });
-  });
-});
 
 //Delete Proposal
+
 
 app.delete("/admin/proposals/:id", (req, res) => {
   const sql = `
@@ -356,6 +339,7 @@ app.delete("/admin/proposals/:id", (req, res) => {
       res.send({ result, msg: { text: 'OK, Cat gone', type: 'success' } });
   });
 });
+
 
 
 

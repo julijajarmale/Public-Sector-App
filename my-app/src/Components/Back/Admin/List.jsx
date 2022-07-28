@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import BackContext from "../BackContext";
-import Proposal from "./Proposal";
+import BackProposal from "./Proposal";
 
 
-function List() {
+
+function AdminList() {
   const { proposals} = useContext(BackContext);
 
   return (
@@ -15,7 +16,7 @@ function List() {
           <ul className="list-group-item">
             {proposals
               ? proposals.map((proposal) => (
-                  <Proposal key={proposal.id} proposal={proposal}></Proposal>
+                  <BackProposal key={proposal.id} proposal={proposal}></BackProposal>
                 ))
               : null}
           </ul>
@@ -26,4 +27,4 @@ function List() {
   );
 }
 
-export default List;
+export default AdminList;

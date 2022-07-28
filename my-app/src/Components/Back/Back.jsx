@@ -25,7 +25,7 @@ function Back({show}) {
 
     const [proposals, setProposals] = useState(null)
     const [deleteProposal, setDeleteProposal] = useState(null)
-    const [editProposal, setEditProposal] = useState(null)
+    
 
 
 //READ MUNI
@@ -107,7 +107,6 @@ useEffect(() => {
        
 }, [editSector]);
 
-
 //READ PROPOSALS
 useEffect(() => {
     axios.get('http://localhost:3003/proposals', authConfig())
@@ -120,17 +119,6 @@ useEffect(() => {
         .then(res => setProposals(res.data));
 }, [lastUpdate]);
 
-//EDIT Proposals
-
-useEffect(() => {
-    if (null === editProposal) return;
-    axios.put('http://localhost:3003/admin/proposals/' + editProposal.id, editProposal, authConfig())
-        .then(res => {
-            setLastUpdate(Date.now());
-        })
-       
-}, [editProposal]);
-
 //DELETE PROPOSALS
 
 useEffect(() => {
@@ -139,7 +127,7 @@ useEffect(() => {
         .then(res => {
             setLastUpdate(Date.now());
         })
-    
+
 }, [deleteProposal]);
 
     return (
@@ -157,8 +145,9 @@ useEffect(() => {
     setEditSector, 
     setModalSector,
     proposals,
-    setDeleteProposal,
-    setEditProposal
+    setDeleteProposal
+    
+    
            
         }}>
               {

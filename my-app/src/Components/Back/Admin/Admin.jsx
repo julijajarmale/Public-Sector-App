@@ -1,11 +1,11 @@
 
 import Nav from "../Nav";
-import List from "./List";
+import AdminList from "./List";
 function Admin() {
   return (
     <>
         <Nav />
-        <List/>
+        <AdminList/>
     </>
   );
 }

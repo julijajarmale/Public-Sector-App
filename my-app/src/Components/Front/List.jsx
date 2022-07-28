@@ -19,6 +19,9 @@ function List() {
                 ))
               : null}
           </ul>
+          <div className="statistic">
+        <p> We have {proposals === null ? null : proposals.length} proposals</p>
+      </div>
           </div>
         </div>
       </div>

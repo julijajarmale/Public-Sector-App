@@ -11,7 +11,7 @@ function Proposal({proposal}) {
                     <span className="item">{proposal.sector}</span>
                     <span className="item">{proposal.muni}</span>
                     <span className="item">{proposal.comment}</span>
-                    <span className="item">{proposal.approved}</span>
+                    
                 </div>
                
             

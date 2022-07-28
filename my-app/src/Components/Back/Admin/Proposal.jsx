@@ -8,8 +8,13 @@ function BackProposal({ proposal }) {
     setDeleteProposal(proposal);
   };
 
-  const handleEdit = () => {
+  const handleApprove = () => {
     const data = { ...proposal, approved: 1 };
+    setApproveProposal(data);
+  };
+
+  const handleDisapprove = () => {
+    const data = { ...proposal, approved: 0 };
     setApproveProposal(data);
   };
 
@@ -25,10 +30,12 @@ function BackProposal({ proposal }) {
         </p>
       </div>
       <div className="buttons">
-        <button type="button" className="buttons btn4" onClick={handleEdit}>
+        <button type="button" className="buttons btn4" onClick={handleApprove}>
           Approve
         </button>
-
+        <button type="button" className="buttons btn5" onClick={handleDisapprove}>
+         Disapprove
+        </button>
         <button type="button" className="buttons btn3" onClick={handleDelete}>
           Delete
         </button>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 
 import FrontContext from "./FrontContext";
@@ -10,14 +11,23 @@ const {setCreateProposal, municipalities, sectors} = useContext(FrontContext)
 
 
 const [title, setTitle] = useState("");
-const [municipality, setMunicipality] = useState("");
+const [municipality, setMunicipality] = useState( '');
 const [sector, setSector] = useState("");
 const [comment, setComment] = useState('');
 
+useEffect(()=> {
+  if(municipalities === null) return
+  setMunicipality(municipalities[0].id)
+},[municipalities])
 
+useEffect(()=> {
+  if(sectors === null) return
+  setSector(sectors[0].id)
+},[sectors])
 
   
 const handleCreate = () => {
+
     const data = { 
       title, 
       municipality: parseInt(municipality),
@@ -25,10 +35,12 @@ const handleCreate = () => {
       comment
       
      };
+     console.log(municipalities[0].id)
+    console.log(data)
     setCreateProposal(data);
     setTitle("");
-    setMunicipality("0");
-    setSector("0");
+    setMunicipality(municipalities[0].id);
+    setSector(sectors[0].id);
     setComment('');
    // setCreateComment({comment, sectorId: sector.id});
     
@@ -39,7 +51,7 @@ const handleCreate = () => {
     <div className="container">
       <div className="row">
         <div className="col-4">
-          <form className="form">
+          <form className="form" >
             <h2>Add Proposal</h2>
             <div className="form-row">
               <input
@@ -55,12 +67,12 @@ const handleCreate = () => {
               <select
                 className="input"
                 onChange={(e) => setMunicipality(e.target.value)}
-                value={municipality}
+             value={municipality}
               >
                 {municipalities
-                  ? municipalities.map((municipality) => (
-                      <option key={municipality.id} value={municipality.id}>
-                        {municipality.name} 
+                  ? municipalities.map((mun) => (
+                      <option key={mun.id} value={mun.id} >
+                        {mun.name} 
                       </option>
                     ))
                   : null}
@@ -72,6 +84,7 @@ const handleCreate = () => {
                 className="input"
                 onChange={(e) => setSector(e.target.value)}
                 value={sector}
+                name="sector"
               >
                 {sectors
                   ? sectors.map((sector) => (
